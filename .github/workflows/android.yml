@@ -18,23 +18,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        cache: gradle
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
-
-    - name: Create gradle wrapper if missing
-      run: |
-        if [ ! -f "gradlew" ]; then
-          echo "Creating gradle wrapper..."
-          gradle wrapper --gradle-version 8.0
-          chmod +x gradlew
-        else
-          chmod +x gradlew
-        fi
-
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
 
     - name: Build Debug APK
       run: ./gradlew assembleDebug
